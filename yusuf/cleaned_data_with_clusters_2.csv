@@ -1,4 +1,4 @@
-price,bedrooms,sqft_lot,floors,waterfront,view,condition,yr_built,yr_renovated,zipcode,lat,long,nearest_station_distance_km,density,commute_time,distance_to_point_km,is_near_shore,grade_living,bathroom_category_+3 Bathrooms,bathroom_category_1-2 Bathrooms,bathroom_category_2-3 Bathrooms,bathroom_category_Studio or 1 Bathroom
+km,density,commute_time,distance_to_point_kprice,bedrooms,sqft_lot,floors,waterfront,view,condition,yr_built,yr_renovated,zipcode,lat,long,nearest_station_distance_m,is_near_shore,grade_living,bathroom_category_+3 Bathrooms,bathroom_category_1-2 Bathrooms,bathroom_category_2-3 Bathrooms,bathroom_category_Studio or 1 Bathroom
 221900.0,3,5650,1.0,0,0,3,1955,0,98178,47.5112,-122.257,8620.002287411395,5364.0,32.9,0.5957631279369822,0,8260,0,0,0,1
 538000.0,3,7242,2.0,0,0,3,1951,1991,98125,47.721,-122.319,2078.181042048624,7999.0,28.9,3.038595600521312,0,17990,0,0,1,0
 180000.0,2,10000,1.0,0,0,3,1933,0,98028,47.7379,-122.233,8109.552186239611,3833.0,33.1,2.3176693333392127,0,4620,0,0,0,1
