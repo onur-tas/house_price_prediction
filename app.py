@@ -22,6 +22,7 @@ def load_models():
     model_sentence = joblib.load("model_sentence.pkl")
     model_cluster_0 = joblib.load('model_cluster_0_v2.pkl')
     scaler_cluster_0 = joblib.load('scaler_cluster_0.pkl')
+
     model_cluster_1 = joblib.load('model_cluster_1.pkl')
     model_cluster_2 = joblib.load('model_cluster_2.pkl')
     scaler_cluster_1 = joblib.load('scaler_cluster_1.pkl')
@@ -378,8 +379,6 @@ def main():
 
             
             write_prediction_gap(prediction=int(predicted_price) , rmse=rmse_cluster)
-
-
 
 if __name__ == "__main__":
     main()
