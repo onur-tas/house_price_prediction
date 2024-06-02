@@ -20,7 +20,7 @@ def load_models():
     model_classification = joblib.load("model_classification_xgboost.pkl")
     model_sentence = joblib.load("model_sentence.pkl")
     model_cluster_0 = joblib.load('model_cluster_0_v2.pkl')
-    scaler_cluster_0 = joblib.load('scaler_grade_living_cluster_0.pkl')
+    scaler_cluster_0 = joblib.load('scaler_cluster_0.pkl')
     return model_classification, model_sentence, model_cluster_0, scaler_cluster_0
 
 #@st.cache_data
@@ -198,20 +198,22 @@ def main():
         # Predict the price of house:
         grade_living = input_grade*input_sqft_living
 
+        grade_living_normalized = np.log1p(grade_living)
+
+
         # create df from the inputs
         cluster_0_inputs = {
-            'grade_living_normalized': [grade_living],
+            'grade_living_normalized': [grade_living_normalized],
             'lat': [lat],
             'nearest_station_distance_km': [distance_to_station]
         }
-
         # Convert dictionary to DataFrame
         cluster_0_inputs_df = pd.DataFrame(cluster_0_inputs)
         scaled_inputs = scaler_cluster_0.transform(cluster_0_inputs_df)
         predicted_price = model_cluster_0.predict(scaled_inputs)
 
         # Placeholder for actual price prediction
-        st.subheader("House Price Prediction:")
+        st.subheader(f"House Price Prediction:  {predicted_price[0]}" )
         st.write("House Price:", predicted_price[0])  # Placeholder for actual price prediction
         if app_mode == "Select Example":
             st.write("Actual House Price ---> ", df_original.iloc[row_number]["price"])
