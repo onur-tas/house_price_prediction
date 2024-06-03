@@ -15,7 +15,7 @@ import folium
 import streamlit_folium as sf
 
 # Function to load the trained models
-@st.cache_data
+
 def load_models():
     # Load your trained models here
     model_classification = joblib.load("model_classification_xgboost.pkl")
