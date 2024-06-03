@@ -27,15 +27,15 @@ def load_models():
     
     # Load your trained models here
     try:
-        model_classification = torch.load("model_classification_xgboost.pth", map_location=map_location)
-        model_sentence = torch.load("model_sentence.pth", map_location=map_location)
-        model_cluster_0 = torch.load('model_cluster_0_v2.pth', map_location=map_location)
-        scaler_cluster_0 = torch.load('scaler_cluster_0.pth', map_location=map_location)
+        model_classification = torch.load("model_classification_xgboost.pkl", map_location=map_location)
+        model_sentence = torch.load("model_sentence.pkl", map_location=map_location)
+        model_cluster_0 = torch.load('model_cluster_0_v2.pkl', map_location=map_location)
+        scaler_cluster_0 = torch.load('scaler_cluster_0.pkl', map_location=map_location)
 
-        model_cluster_1 = torch.load('model_cluster_1.pth', map_location=map_location)
-        model_cluster_2 = torch.load('model_cluster_2.pth', map_location=map_location)
-        scaler_cluster_1 = torch.load('scaler_cluster_1.pth', map_location=map_location)
-        scaler_cluster_2 = torch.load('scaler_cluster_2.pth', map_location=map_location)
+        model_cluster_1 = torch.load('model_cluster_1.pkl', map_location=map_location)
+        model_cluster_2 = torch.load('model_cluster_2.pkl', map_location=map_location)
+        scaler_cluster_1 = torch.load('scaler_cluster_1.pkl', map_location=map_location)
+        scaler_cluster_2 = torch.load('scaler_cluster_2.pkl', map_location=map_location)
     except Exception as e:
         st.error(f"Error loading models: {e}")
         return None
