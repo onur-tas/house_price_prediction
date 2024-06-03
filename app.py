@@ -13,20 +13,32 @@ import numpy as np
 from data_cleaning import get_zipcode, parse_zip_info, extract_density
 import folium
 import streamlit_folium as sf
+import torch
 
 # Function to load the trained models
 
+@st.cache_data
 def load_models():
+    map_location = torch.device('cpu')
+    
+    # Check for CUDA (NVIDIA GPUs)
+    if torch.cuda.is_available():
+        map_location = torch.device('cuda')
+    
     # Load your trained models here
-    model_classification = joblib.load("model_classification_xgboost.pkl")
-    model_sentence = joblib.load("model_sentence.pkl")
-    model_cluster_0 = joblib.load('model_cluster_0_v2.pkl')
-    scaler_cluster_0 = joblib.load('scaler_cluster_0.pkl')
+    try:
+        model_classification = torch.load("model_classification_xgboost.pth", map_location=map_location)
+        model_sentence = torch.load("model_sentence.pth", map_location=map_location)
+        model_cluster_0 = torch.load('model_cluster_0_v2.pth', map_location=map_location)
+        scaler_cluster_0 = torch.load('scaler_cluster_0.pth', map_location=map_location)
 
-    model_cluster_1 = joblib.load('model_cluster_1.pkl')
-    model_cluster_2 = joblib.load('model_cluster_2.pkl')
-    scaler_cluster_1 = joblib.load('scaler_cluster_1.pkl')
-    scaler_cluster_2 = joblib.load('scaler_cluster_2.pkl')
+        model_cluster_1 = torch.load('model_cluster_1.pth', map_location=map_location)
+        model_cluster_2 = torch.load('model_cluster_2.pth', map_location=map_location)
+        scaler_cluster_1 = torch.load('scaler_cluster_1.pth', map_location=map_location)
+        scaler_cluster_2 = torch.load('scaler_cluster_2.pth', map_location=map_location)
+    except Exception as e:
+        st.error(f"Error loading models: {e}")
+        return None
 
     shoreline_data = gpd.read_file("full_water.geojson")
     shoreline_data = shoreline_data[shoreline_data['SUBSET'] == 'Bigwater waterbody']  # Filter for the
@@ -34,7 +46,7 @@ def load_models():
     # Reproject the shoreline data to EPSG:2926 (meters)
     shoreline_data = shoreline_data.to_crs("EPSG:4326")
     return model_classification, model_sentence, model_cluster_0, scaler_cluster_0, model_cluster_1, model_cluster_2, scaler_cluster_1, scaler_cluster_2, shoreline_data
-
+    
 @st.cache_data
 def load_dfs():
     df_original = pd.read_csv('cleaned_data.csv')
